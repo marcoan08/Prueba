@@ -8,7 +8,7 @@
 import uvm_pkg::*;
 `include "Router_library.sv"
 `include "Interface.sv"
-`include "Sequence_item.sv"
+`include "Sequence_Item.sv"
 //`include "coverage.sv"
 `include "Sequence.sv"
 `include "Driver.sv"
