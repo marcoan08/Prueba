@@ -33,7 +33,7 @@ class env #(
             //string agt_name;
             //$sformat(agt_name, "agt_%0d", i);
             //uvm_config_db#(int)::set(this, agt_name, "terminal_id", i);
-            agt = agent#(pckg_sz, num_ntrfs, broadcast, fifo_depth, columns, rows, id_c, id_r)::type_id::create(agt_name, this);
+            agt = agent#(pckg_sz, num_ntrfs, broadcast, fifo_depth, columns, rows, id_c, id_r)::type_id::create("agt", this);
             if (agt == null) begin
                 `uvm_fatal("ENV", $sformatf("Failed to create agent"))
             end
