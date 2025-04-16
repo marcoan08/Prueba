@@ -41,7 +41,8 @@ class test extends uvm_test;
             //fork
                 //automatic int j = i;
                 //begin
-                    normal_sequence seq = normal_sequence::type_id::create($sformatf("seq"));
+                    normal_sequence seq;
+                    seq = normal_sequence::type_id::create("seq");
                     seq.randomize();
                     seq.start(e0.agt.s0);
                 //end
