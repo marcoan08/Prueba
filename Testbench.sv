@@ -14,7 +14,7 @@ import uvm_pkg::*;
 `include "Driver.sv"
 `include "Monitor.sv"
 `include "Scoreboard.sv"
-`include "Agente.sv"
+`include "Agent.sv"
 `include "Environment.sv"
 `include "Test.sv"
 
