@@ -93,7 +93,7 @@ class driver #(
             else begin
                 fifo_send.push_back(m_item.D_in);
                 counter = counter+1; 
-                `uvm_info("DRV", $sformatf("DIRVER: Se agrego un dato %0h a la cola del terminal %0d" m_item.input_terminal, m_item.D_in), UVM_MEDIUM)
+                `uvm_info("DRV", $sformatf("DIRVER: Se agrego un dato %0h a la cola del terminal %0d", m_item.input_terminal, m_item.D_in), UVM_MEDIUM)
                 vif.pndng_i_in[m_item.input_terminal] = '1;
                 
                 // Actualizar la copia del item con información relevante
