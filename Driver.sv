@@ -109,7 +109,7 @@ class driver #(
 
             if (fifo_send.size() > 0) begin //Para meter el dato de la fifo al dispositivo
                 vif.data_out_i_in[m_item.input_terminal] = fifo_send.pop_front();
-                ``uvm_info("DRV", $sformatf("DIRVER: Se agrego un dato al DUT desde terminal %0d : %0h", m_item.input_terminal, vif.data_out_i_in[m_item.input_terminal]), UVM_MEDIUM)
+                `uvm_info("DRV", $sformatf("DIRVER: Se agrego un dato al DUT desde terminal %0d : %0h", m_item.input_terminal, vif.data_out_i_in[m_item.input_terminal]), UVM_MEDIUM)
             end
 
             if (vif.popin [m_item.input_terminal]) begin // ESto no esta funcionando, el popin no está funcionando NINGUNA DE LA SALIDAS ESTÁ FUNCIONANDO
