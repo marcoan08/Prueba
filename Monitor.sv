@@ -101,8 +101,8 @@ class monitor #(
 
             // Enviar item esperado si es válido
             if (esperado.D_in != 0) begin
-                `uvm_info("MON", $sformatf("Terminal %0d: Enviando item esperado D_in=%h", 
-                        i, esperado.D_in), UVM_MEDIUM);
+                `uvm_info("MON", $sformatf("Terminal : Enviando item esperado D_in=%h", 
+                         esperado.D_in), UVM_MEDIUM);
                 m_analysis_port.write(esperado);
             end
         end
