@@ -15,7 +15,7 @@ class env #(
 
     agent #(
         .pckg_sz(pckg_sz), .num_ntrfs(num_ntrfs), .broadcast(broadcast), .fifo_depth(fifo_depth), .columns(columns), .rows(rows), .id_c(id_c), .id_r(id_r)
-    ) agt]; //un solo agente
+    ) agt; //un solo agente
 
     scoreboard #(
         .pckg_sz(pckg_sz), .num_ntrfs(num_ntrfs), .broadcast(broadcast), .fifo_depth(fifo_depth), .columns(columns), .rows(rows), .id_c(id_c), .id_r(id_r)
