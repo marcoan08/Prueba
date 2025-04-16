@@ -1,42 +1,41 @@
-`ifndef ROUTER_SINGLE_PKT_SEQUENCE_SV
-`define ROUTER_SINGLE_PKT_SEQUENCE_SV
+//Sequence para Mesh con 1 disp
 
-class router_single_pkt_sequence extends uvm_sequence #(router_item);
-    `uvm_object_utils(router_single_pkt_sequence)
+class normal_sequence  #(
+    parameter pckg_sz = 40,
+    parameter num_ntrfs = 4,
+    parameter broadcast = {8{1'b1}},
+    parameter fifo_depth = 4,
+    parameter columns = 4,
+    parameter rows = 4,
+    parameter id_c = 0,
+    parameter id_r = 0
+)extends uvm_sequence #(Item);
+    `uvm_object_utils(normal_sequence); 
 
-    // Parámetros configurables (pueden setearse desde el test)
-    int source_terminal = 0;  // Terminal origen (0-3)
-    int target_terminal = 1;  // Terminal destino (0-3)
-    bit [3:0] target_row = 1; // Fila destino (para ruteo)
-    bit [3:0] target_col = 1; // Columna destino (para ruteo)
-    bit mode = 0;             // 0: columna primero, 1: fila primero
-
-    function new(string name = "router_single_pkt_sequence");
+   
+    function new(string name="normal_sequence");
         super.new(name);
     endfunction
 
-    task body();
-        router_item pkt;
-        pkt = router_item::type_id::create("pkt");
+    int num = 1; 
 
-        // Configurar el paquete
-        pkt.target_id  = target_terminal;
-        pkt.source_id  = source_terminal;
-        pkt.target_row = target_row;
-        pkt.target_col = target_col;
-        pkt.mode       = mode;
-        pkt.packet_id  = 1;           // ID único
-        pkt.payload    = 8'hA5;       // Payload fijo (para verificación fácil)
-        pkt.delay      = 5;           // Sin delay
-        pkt.is_response = 0;
+    virtual task body();
+        //for(int i = 0; i < num; i++)begin
+            Item item = Item::type_id::create("item");
 
-        `uvm_info("SEQ", $sformatf("Enviando paquete SINGLE desde terminal %0d -> %0d: %s", 
-                                  source_terminal, target_terminal, pkt.convert2string()), UVM_LOW)
+            //item.const_retardo_c.constraint_mode(1);
+            //item.input_terminal_c.constraint_mode(1);
+            //item.target_col_c.constraint_mode(1);
+            //item.target_row_c.constraint_mode(1);
+            start_item(item); 
+            item.randomize();
+            item.post_randomize();
+            
+            item.D_in = {item.nxt_jump, item.target_row, item.target_col, item.mode, item.payload};
+            `uvm_info("SEQ", $sformatf("Dato del secuenciador [%0h], en la input terminal[%0d]", item.D_in, item.input_terminal), UVM_HIGH)
+            finish_item(item);
+        //end
+        `uvm_info("SEQ", $sformatf("Se generaron %0d items para la secuencia",num), UVM_HIGH)
 
-        // Enviar el paquete
-        start_item(pkt);
-        finish_item(pkt);
     endtask
 endclass
-
-`endif // ROUTER_SINGLE_PKT_SEQUENCE_SV
