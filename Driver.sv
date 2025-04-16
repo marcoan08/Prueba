@@ -93,7 +93,7 @@ class driver #(
             else begin
                 fifo_send.push_back(m_item.D_in);
                 counter = counter+1; 
-                `uvm_info("DRV", $sformatf("DIRVER: Se agrego un dato %0h a la cola del terminal %0d", m_item.input_terminal, m_item.D_in), UVM_MEDIUM)
+                `uvm_info("DRV", $sformatf("DIRVER: Se agrego un dato %0h a la cola del terminal %0h", m_item.input_terminal, m_item.D_in), UVM_MEDIUM)
                 vif.pndng_i_in[m_item.input_terminal] = '1;
                 
                 // Actualizar la copia del item con información relevante
@@ -125,6 +125,7 @@ class driver #(
             else begin
                 vif.data_out_i_in[m_item.input_terminal] = vif.data_out_i_in[m_item.input_terminal]; // Se queda igual si el pop no esta activado
             end
+            `uvm_info("DRV", $sformatf("Estado del pending de entrada %0b", vif.pndng_i_in[m_item.input_terminal]), UVM_MEDIUM)
         //end
     endtask
 endclass
